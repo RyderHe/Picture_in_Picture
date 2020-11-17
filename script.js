@@ -21,23 +21,26 @@ async function selectMediaStream() {
     }
 }
 
+// On Load
 button2.addEventListener('click', async () => {
     // disable button
     button2.disabled = true;
     // start picture in picture
     await video.requestPictureInPicture();
-    // On Load
-// selectMediaStream();
     // reset button
     button2.disabled = false;
 });
 
-// On Load
 button1.addEventListener('click', () => {
     button2.disabled = true;
+    
+    // if picture in picture mode is triggered, close it first
     if (document.pictureInPictureElement) {
         document.exitPictureInPicture();
     }
+
+    // select the media stream
     selectMediaStream();
+    
     button2.disabled = false;
 });
