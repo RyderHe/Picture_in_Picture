@@ -1,5 +1,6 @@
 const video = document.getElementById('video');
-const button = document.getElementById('button');
+const button1 = document.getElementById('button1');
+const button2 = document.getElementById('button2');
 
 // Prompt to select media stream, pass to video element, then play
 // async keyword: return a promise rather than directly returning a value
@@ -20,14 +21,23 @@ async function selectMediaStream() {
     }
 }
 
-button.addEventListener('click', async () => {
+button2.addEventListener('click', async () => {
     // disable button
-    button.disabled = true;
+    button2.disabled = true;
     // start picture in picture
     await video.requestPictureInPicture();
+    // On Load
+// selectMediaStream();
     // reset button
-    button.disabled = false;
+    button2.disabled = false;
 });
 
 // On Load
-selectMediaStream();
+button1.addEventListener('click', () => {
+    button2.disabled = true;
+    if (document.pictureInPictureElement) {
+        document.exitPictureInPicture();
+    }
+    selectMediaStream();
+    button2.disabled = false;
+});
